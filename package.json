@@ -28,10 +28,11 @@
         }
     },
     "scripts": {
-        "build": "just build"
+        "prepublish": "just build"
     },
     "devDependencies": {
         "esbuild": "^0.24.2",
+        "rust-just": "^1.39.0",
         "standard": "^17.1.2",
         "typescript": "^5.0.0"
     }
