@@ -8,7 +8,8 @@
         ".": {
             "import": "./dist/env.mjs",
             "require": "./dist/env.cjs",
-            "types": "./dist/env.d.ts"
+            "types": "./dist/env.d.ts",
+            "jsr": "./env.ts"
         }
     },
     "scripts": {
@@ -16,6 +17,7 @@
     },
     "devDependencies": {
         "esbuild": "^0.24.2",
+        "standard": "^17.1.2",
         "typescript": "^5.0.0"
     }
 }
