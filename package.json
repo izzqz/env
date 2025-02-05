@@ -28,7 +28,7 @@
         }
     },
     "scripts": {
-        "prepublish": "just build"
+        "prepublish": "rust-just build"
     },
     "devDependencies": {
         "esbuild": "^0.24.2",

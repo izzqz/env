@@ -1,6 +1,6 @@
-const { test } = require('node:test')
-const assert = require('node:assert')
-const env = require('@izzqz/env')
+import { test } from 'node:test'
+import assert from 'node:assert'
+import env from '@izzqz/env'
 
 test('env - basic functionality', () => {
   // Set test environment variable
@@ -81,4 +81,4 @@ test('env - cleanup test environment', async (t) => {
   // Clean up any test environment variables
   delete process.env.TEST_VAR
   env.env_novalue.clear()
-})
+}) 

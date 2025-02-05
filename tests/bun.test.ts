@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import env from "..";
+import env from "@izzqz/env";
 
 test("env - basic functionality", () => {
     // Set test environment variable
