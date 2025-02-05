@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        bun: [1, 'latest']
+        bun: ['latest']
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
