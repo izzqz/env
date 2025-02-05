@@ -63,15 +63,14 @@ export function assertAndThrow(): void {
   throw new EnvironmentVariableError(env_novalue);
 }
 
-/**
- * Get an environment variable.
- *
- * @private
- * @param {string} key env name
- * @returns {string | undefined} env value
- */
+interface GlobalWithEnv {
+  process?: { env: Record<string, string | undefined> };
+  Deno?: { env: { get(key: string): string | undefined } };
+  Bun?: { env: Record<string, string | undefined> };
+}
+
 function get_env(key: string): string | undefined {
-  const g = globalThis as any;
+  const g = globalThis as GlobalWithEnv;
 
   if (g.process) {
     return g.process.env[key];
@@ -133,4 +132,9 @@ const envWithProps = Object.assign(env, {
   assertAndThrow,
 }) as EnvFunction;
 
+// For CommonJS compatibility
+// @ts-ignore: module is only available in CommonJS environments
+if (typeof module !== "undefined") module.exports = envWithProps;
+
+// For ESM
 export default envWithProps;

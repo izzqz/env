@@ -1,13 +1,13 @@
 {
   "name": "@izzqz/env",
   "version": "0.1.0",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
+  "main": "dist/env.cjs",
+  "module": "dist/env.mjs",
   "types": "dist/env.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
+      "import": "./dist/env.mjs",
+      "require": "./dist/env.cjs",
       "types": "./dist/env.d.ts"
     }
   },
