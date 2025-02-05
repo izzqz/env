@@ -1,0 +1,48 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  node:
+    name: Node.js ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [16, 18, 20, 22, 'latest']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm exec rust-just test-node
+
+  deno:
+    name: Deno ${{ matrix.deno }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        deno: ['v1.x', 'v2.x']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: ${{ matrix.deno }}
+      - run: npm exec rust-just test-deno
+
+  bun:
+    name: Bun ${{ matrix.bun }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        bun: ['1.0.x', '1.2.x', 'latest']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ matrix.bun }}
+      - run: npm exec rust-just test-bun
