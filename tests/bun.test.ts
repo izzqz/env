@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import env from "../dist/env.mjs";
+import env from "..";
 
 test("env - basic functionality", () => {
     // Set test environment variable
