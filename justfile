@@ -31,5 +31,9 @@ test-deno:
 test-node:
     node --test tests/node.test.cjs
 
+# Run Bun tests
+test-bun:
+    bun test tests/bun.test.ts
+
 # Run all tests
-test: build test-deno test-node
+test: build test-deno test-node test-bun
