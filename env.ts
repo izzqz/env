@@ -13,7 +13,7 @@
  *
  * @type {Set<string>}
  */
-export const env_novalue = new Set<string>();
+export const env_novalue: Set<string> = new Set<string>();
 
 /**
  * Error thrown when environment variables are missing
