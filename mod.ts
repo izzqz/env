@@ -1,5 +1,30 @@
+/**
+ * @module @izzqz/env
+ */
+
+/**
+ * List of environment variables without a value
+ *
+ * @example
+ * ```ts
+ * env.env_novalue; // Set<string>
+ * env.env_novalue.has('FOO'); // false
+ * ```
+ *
+ * @type {Set<string>}
+ */
 export const env_novalue = new Set<string>();
 
+/**
+ * Error thrown when environment variables are missing
+ *
+ * @example
+ * ```ts
+ * throw new env.EnvironmentVariableError(['FOO']);
+ * ```
+ *
+ * @type {EnvironmentVariableError}
+ */
 export class EnvironmentVariableError extends Error {
     envs: Set<string>;
 
@@ -10,23 +35,35 @@ export class EnvironmentVariableError extends Error {
             message = `Environment variable required: ${env_name}`;
         } else {
             message = `Environment variables required: ${
-                Array.from(envs).join(', ')
+                Array.from(envs).join(", ")
             }`;
         }
         super(message);
-        this.name = 'EnvironmentVariableError';
+        this.name = "EnvironmentVariableError";
         this.envs = envs;
     }
 
-    override toString() {
-        return `${this.name}\n  ${Array.from(this.envs).join('\n  ')}`;
+    override toString(): string {
+        return `${this.name}\n  ${Array.from(this.envs).join("\n  ")}`;
     }
 }
 
-export function env(
-    key: string,
-    defaultValue?: string,
-): string | undefined {
+/**
+ * Get an environment variable.
+ *
+ * @example
+ * ```ts
+ * env('FOO'); // 'bar'
+ * env('FOO', 'default'); // 'bar'
+ * env('BAR'); // undefined
+ * env('BAR', 'default'); // 'default'
+ * env('BAZ', undefined); // env not required
+ * ```
+ * @param {string} key - Environment variable name
+ * @param {string} [defaultValue] - Default value if not set
+ * @returns {string | undefined} Environment variable default value
+ */
+export function env(key: string, defaultValue?: string): string | undefined {
     const value = get_env(key);
 
     if (value === undefined) {
@@ -45,55 +82,44 @@ Object.defineProperties(env, {
     env_novalue: { get: () => env_novalue },
     EnvironmentVariableError: { value: EnvironmentVariableError },
     assertAndThrow: { value: assertAndThrow },
-    assertAndPanic: { value: assertAndPanic },
 });
 
 export default env;
 
-export function assertAndThrow() {
+/**
+ * Assert that environment variables are set and throw an error if they are not.
+ *
+ * @example
+ * ```ts
+ * env.assertAndThrow();
+ * ```
+ *
+ * @returns {void}
+ */
+export function assertAndThrow(): void {
     if (env_novalue.size === 0) return;
-
     throw new EnvironmentVariableError(env_novalue);
 }
 
-export function assertAndPanic() {
-    if (env_novalue.size === 0) return;
+/**
+ * Get an environment variable.
+ *
+ * @private
+ * @param {string} key env name
+ * @returns {string | undefined} env value
+ */
+function get_env(key: string): string | undefined {
+    const g = globalThis as any;
 
-    if (env_novalue.size === 1) {
-        console.error(
-            `Environment variable required: ${env_novalue.keys()[0]}`,
-        );
-        panic();
-    } else {
-        console.error(
-            `Environment variables required:\n  ${
-                Array.from(env_novalue).join('\n  ')
-            }`,
-        );
-        panic();
+    if (g.process) {
+        return g.process.env[key];
     }
-}
 
-function get_env(key: string) {
-    if (globalThis.process) {
-        return globalThis.process.env[key];
+    if (g.Deno) {
+        return g.Deno.env.get(key);
     }
-    if (globalThis.Deno) {
-        return globalThis.Deno.env.get(key);
-    }
-    if (globalThis.Bun) {
-        return globalThis.Bun.env[key];
-    }
-}
 
-function panic() {
-    if (globalThis.process) {
-        globalThis.process.exit(1);
-    }
-    if (globalThis.Deno) {
-        globalThis.Deno.exit(1);
-    }
-    if (globalThis.Bun) {
-        globalThis.Bun.exit(1);
+    if (g.Bun) {
+        return g.Bun.env[key];
     }
 }

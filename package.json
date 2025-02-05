@@ -1,0 +1,23 @@
+{
+    "name": "@izzqz/env",
+    "version": "0.1.0",
+    "main": "dist/index.cjs",
+    "module": "dist/index.mjs",
+    "types": "dist/mod.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.cjs",
+            "types": "./dist/mod.d.ts"
+        }
+    },
+    "scripts": {
+        "build:cjs": "tsc -p tsconfig.cjs.json && mv dist/cjs/mod.js dist/index.cjs",
+        "build:esm": "tsc -p tsconfig.esm.json && mv dist/esm/mod.js dist/index.mjs && mv dist/esm/mod.d.ts dist/mod.d.ts",
+        "build": "rm -rf dist && mkdir dist && npm run build:cjs && npm run build:esm && rm -rf dist/cjs dist/esm",
+        "prepublishOnly": "npm run build"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.0"
+    }
+}

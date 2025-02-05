@@ -1,18 +1,17 @@
-import { build, emptyDir } from '@deno/dnt';
+import { build, emptyDir } from 'https://deno.land/x/dnt/mod.ts';
 
-await emptyDir('./build');
+await emptyDir('./npm');
 
 await build({
     entryPoints: ['./mod.ts'],
-    outDir: './build',
+    outDir: './npm',
     shims: {
-        deno: false,
+        deno: true,
     },
     package: {
         name: '@izzqz/env',
-        version: Deno.args[0],
-        description:
-            'Minimal environment variable library. Runtime agnostic, no dependencies',
+        version: '0.1.0',
+        description: 'Environment variables helper for Node.js, Deno and Bun',
         license: 'MIT',
         repository: {
             type: 'git',
@@ -21,9 +20,10 @@ await build({
         bugs: {
             url: 'https://github.com/izzqz/env/issues',
         },
+        engines: {
+            node: '>=16',
+        },
     },
-    postBuild() {
-        Deno.copyFileSync('LICENSE', 'build/LICENSE');
-        Deno.copyFileSync('README.md', 'build/README.md');
-    },
+    typeCheck: true,
+    test: false,
 });
