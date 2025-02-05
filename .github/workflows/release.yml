@@ -36,4 +36,6 @@ jobs:
           fail_on_unmatched_files: true
   publish:
     needs: [release, tests]
+    permissions:
+      id-token: write
     uses: ./.github/workflows/publish.yml
