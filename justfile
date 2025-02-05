@@ -36,3 +36,7 @@ test-bun:
 
 # Run all tests
 test: build test-deno test-node test-bun
+
+# Bump version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]
+bump version:
+    npm version {{version}} --preid dev --sign-git-tag
