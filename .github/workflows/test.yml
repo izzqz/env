@@ -7,7 +7,24 @@ on:
     branches: [ main ]
 
 jobs:
+  build:
+    name: Build package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+      - run: npm ci
+      - run: npm exec rust-just build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
   node:
+    needs: build
     name: Node.js ${{ matrix.node }}
     runs-on: ubuntu-latest
     strategy:
@@ -18,10 +35,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
       - run: npm ci
       - run: npm exec rust-just test-node
 
   deno:
+    needs: build
     name: Deno ${{ matrix.deno }}
     runs-on: ubuntu-latest
     strategy:
@@ -32,9 +54,14 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: ${{ matrix.deno }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
       - run: npm exec rust-just test-deno
 
   bun:
+    needs: build
     name: Bun ${{ matrix.bun }}
     runs-on: ubuntu-latest
     strategy:
@@ -45,4 +72,8 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: ${{ matrix.bun }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
       - run: npm exec rust-just test-bun
