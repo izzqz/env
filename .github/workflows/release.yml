@@ -39,4 +39,5 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      packages: write
     uses: ./.github/workflows/publish.yml
