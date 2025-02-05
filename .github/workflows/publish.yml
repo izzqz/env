@@ -30,6 +30,7 @@ jobs:
   github:
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: read
       packages: write
     steps:
