@@ -25,7 +25,7 @@ clean:
 
 # Run Deno tests
 test-deno:
-    deno test tests/deno.test.ts
+    deno test --allow-env --node-modules-dir --no-lock tests/deno.test.ts
 
 # Run all tests
 test: test-deno

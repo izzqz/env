@@ -1,5 +1,5 @@
 import { assertEquals, assertThrows } from "jsr:@std/assert";
-import env from "..";
+import env from "../dist/env.mjs";
 
 Deno.test("env - basic functionality", () => {
     // Set test environment variable
