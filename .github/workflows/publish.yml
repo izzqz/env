@@ -14,7 +14,7 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
-      - run: npx jsr publish
+      - run: npx jsr publish --provenance
 
   npm:
     runs-on: ubuntu-latest
