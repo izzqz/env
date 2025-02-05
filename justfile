@@ -15,9 +15,7 @@ build-esm:
     rm -rf dist/temp-esm
 
 # Build all versions
-build: clean
-    just build-cjs
-    just build-esm
+build: clean build-cjs build-esm 
 
 # Clean build artifacts
 clean:
