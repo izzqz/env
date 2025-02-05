@@ -34,7 +34,3 @@ jobs:
           draft: false
           prerelease: false
           fail_on_unmatched_files: true
-
-  publish:
-    needs: [release, tests]
-    uses: ./.github/workflows/publish.yml
