@@ -1,6 +1,21 @@
 {
     "name": "@izzqz/env",
     "version": "0.1.0",
+    "license": "MIT",
+    "homepage": "https://github.com/izzqz/env#readme",
+    "bugs": {
+        "url": "https://github.com/izzqz/env/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/izzqz/env.git"
+    },
+    "files": [
+        "dist/",
+        "env.ts",
+        "LICENSE",
+        "README.md"
+    ],
     "main": "dist/env.cjs",
     "module": "dist/env.mjs",
     "types": "dist/env.d.ts",
