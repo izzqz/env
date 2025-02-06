@@ -1,0 +1,13 @@
+{
+  "name": "@izzqz/env",
+  "version": "0.1.1",
+  "license": "MIT",
+  "exports": "./env.ts",
+  "publish": {
+    "include": [
+      "LICENSE",
+      "README.md",
+      "env.ts"
+    ]
+  }
+}

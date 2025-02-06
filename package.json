@@ -1,39 +1,39 @@
 {
-    "name": "@izzqz/env",
-    "version": "0.1.16",
-    "license": "MIT",
-    "homepage": "https://github.com/izzqz/env#readme",
-    "bugs": {
-        "url": "https://github.com/izzqz/env/issues"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/izzqz/env.git"
-    },
-    "files": [
-        "dist/",
-        "env.ts",
-        "LICENSE",
-        "README.md"
-    ],
-    "main": "dist/env.cjs",
-    "module": "dist/env.mjs",
-    "types": "dist/env.d.ts",
-    "exports": {
-        ".": {
-            "import": "./dist/env.mjs",
-            "require": "./dist/env.cjs",
-            "types": "./dist/env.d.ts",
-            "jsr": "./env.ts"
-        }
-    },
-    "scripts": {
-        "prepublish": "rust-just build"
-    },
-    "devDependencies": {
-        "esbuild": "^0.24.2",
-        "rust-just": "^1.39.0",
-        "standard": "^17.1.2",
-        "typescript": "^5.0.0"
+  "name": "@izzqz/env",
+  "version": "0.1.16",
+  "license": "MIT",
+  "homepage": "https://github.com/izzqz/env#readme",
+  "bugs": {
+    "url": "https://github.com/izzqz/env/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/izzqz/env.git"
+  },
+  "files": [
+    "dist/",
+    "env.ts",
+    "LICENSE",
+    "README.md"
+  ],
+  "main": "dist/env.cjs",
+  "module": "dist/env.mjs",
+  "types": "dist/env.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/env.mjs",
+      "require": "./dist/env.cjs",
+      "types": "./dist/env.d.ts",
+      "jsr": "./env.ts"
     }
+  },
+  "scripts": {
+    "prepublish": "rust-just build"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2",
+    "rust-just": "^1.39.0",
+    "standard": "^17.1.2",
+    "typescript": "^5.0.0"
+  }
 }
