@@ -105,7 +105,7 @@ jobs:
           bun-version: "latest"
       
       - name: Install lcov
-        run: sudo apt-get install -y lcov jq
+        run: sudo apt-get install -y lcov jq just
       
       - name: Download dist
         uses: actions/download-artifact@v4
