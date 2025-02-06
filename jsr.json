@@ -1,6 +1,6 @@
 {
   "name": "@izzqz/env",
-  "version": "0.1.2",
+  "version": "0.1.17",
   "license": "MIT",
   "exports": "./env.ts",
   "publish": {
