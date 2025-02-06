@@ -42,14 +42,14 @@ test-deno-coverage:
     @mkdir -p coverage/temp/deno coverage/reports
     deno test --coverage=coverage/temp/deno --allow-env --node-modules-dir --no-lock tests/deno.test.ts
     deno coverage coverage/temp/deno --lcov > coverage/reports/deno.lcov
-    genhtml --ignore-errors source,gcov,range coverage/reports/deno.lcov --output-directory coverage/reports/deno
+    genhtml --ignore-errors source,range coverage/reports/deno.lcov --output-directory coverage/reports/deno
 
 # Run Node.js tests with coverage
 test-node-coverage:
     @mkdir -p coverage/temp coverage/reports
     npx c8 --reporter=lcov node --test tests/node.test.cjs tests/node.test.mjs
     mv coverage/lcov.info coverage/reports/node.lcov
-    genhtml --ignore-errors source,gcov,range coverage/reports/node.lcov --output-directory coverage/reports/node
+    genhtml --ignore-errors source,range coverage/reports/node.lcov --output-directory coverage/reports/node
     npx c8 report --reporter=text
 
 # Run Bun tests with coverage
