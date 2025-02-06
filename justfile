@@ -41,5 +41,6 @@ test: build test-deno test-node test-bun
 bump version:
     npm version {{version}} --preid dev --sign-git-tag && \
     node -e "const fs = require('fs'); const pkg = require('./package.json'); let jsr = JSON.parse(fs.readFileSync('jsr.json', 'utf8')); jsr.version = pkg.version; fs.writeFileSync('jsr.json', JSON.stringify(jsr, null, 2));" && \
-    git add jsr.json && git commit --amend --no-edit && \
+    git add jsr.json && \
+    git commit -m "chore: update jsr.json version to $(node -p "require('./package.json').version")" && \
     git tag -f v$(node -p "require('./package.json').version")
