@@ -71,7 +71,7 @@ test-coverage: build
     cp coverage/reports/node.lcov coverage/temp/merged/combined.lcov
     # Add Deno-specific coverage data
     grep -v "SF:.*env\.mjs" coverage/reports/deno.lcov >> coverage/temp/merged/combined.lcov
-    genhtml --ignore-errors source,gcov,range coverage/temp/merged/combined.lcov --output-directory coverage/html
+    genhtml --ignore-errors source,range coverage/temp/merged/combined.lcov --output-directory coverage/html
     # Generate JSON coverage data for the badge
     lcov --summary coverage/temp/merged/combined.lcov | grep -E "lines|functions|branches" | awk '{print $1 " " $3}' | jq -R 'split(" ") | {type:.[0], pct:.[1]}' | jq -s '{total: {"lines": .[0], "functions": .[1], "branches": .[2]}}' > coverage/coverage.json
     @echo "Individual reports in coverage/reports/{deno,node}/index.html"
