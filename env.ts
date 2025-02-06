@@ -1,5 +1,3 @@
-/// <reference lib="es2015" />
-
 /**
  * @module @izzqz/env
  */
