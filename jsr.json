@@ -9,5 +9,8 @@
       "README.md",
       "env.ts"
     ]
+  },
+  "documentationOptions": {
+    "excludeExports": ["module.exports"]
   }
 }
