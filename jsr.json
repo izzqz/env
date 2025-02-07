@@ -1,6 +1,6 @@
 {
   "name": "@izzqz/env",
-  "version": "0.1.27",
+  "version": "0.1.26",
   "license": "MIT",
   "exports": "./env.ts",
   "publish": {
@@ -8,11 +8,6 @@
       "LICENSE",
       "README.md",
       "env.ts"
-    ]
-  },
-  "documentationOptions": {
-    "excludeExports": [
-      "module.exports"
     ]
   }
 }

@@ -132,7 +132,7 @@ const envWithProps = Object.assign(env, {
   assertAndThrow,
 }) as EnvFunction;
 
-// For CommonJS compatibility
+/** @ignore */
 // @ts-ignore: module is only available in CommonJS environments
 if (typeof module !== "undefined") module.exports = envWithProps;
 
