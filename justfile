@@ -82,10 +82,10 @@ test-coverage: build
 release version:
     git checkout main
     git pull
-    npm version {{version}} --preid dev --sign-git-tag
+    npm version {{version}}
     node -e "const fs = require('fs'); const pkg = require('./package.json'); let jsr = JSON.parse(fs.readFileSync('jsr.json', 'utf8')); jsr.version = pkg.version; fs.writeFileSync('jsr.json', JSON.stringify(jsr, null, 2));"
     git add jsr.json
     git commit --amend --no-edit
-    git tag -f v$(node -p "require('./package.json').version")
+    git tag -s -f v$(node -p "require('./package.json').version")
     git push -f
     git push --tags -f
