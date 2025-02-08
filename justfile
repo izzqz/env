@@ -86,6 +86,6 @@ release version:
     node -e "const fs = require('fs'); const pkg = require('./package.json'); let jsr = JSON.parse(fs.readFileSync('jsr.json', 'utf8')); jsr.version = pkg.version; fs.writeFileSync('jsr.json', JSON.stringify(jsr, null, 2));"
     git add jsr.json
     git commit --amend --no-edit
-    git tag -s -f v$(node -p "require('./package.json').version")
+    git tag -s -f -m "Release v$(node -p "require('./package.json').version")" v$(node -p "require('./package.json').version")
     git push -f
     git push --tags -f
