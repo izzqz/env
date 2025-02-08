@@ -10,8 +10,24 @@ jobs:
   tests:
     uses: ./.github/workflows/test.yml
 
+  publish-precheck:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: "latest"
+        - name: Install dependencies
+          run: npm ci
+        - name: npm check
+          run: npm publish --dry-run
+          env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        - name: jsr check
+          run: npx jsr publish --dry-run
+
   release:
-    needs: tests
+    needs: [publish-precheck, tests]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -43,7 +59,7 @@ jobs:
           prerelease: false
           fail_on_unmatched_files: true
   publish:
-    needs: [release, tests]
+    needs: [release, publish-precheck]
     permissions:
       id-token: write
       contents: read
